@@ -1,0 +1,81 @@
+import 'package:bluff_chess/rulebook_onboard/rulebook_export.dart';
+import 'package:bluff_chess/rulebook_onboard/rulebookp6.dart';
+import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+
+class Rulebook extends StatefulWidget {
+  const Rulebook({Key? key}) : super(key: key);
+
+  @override
+  _RulebookState createState() => _RulebookState();
+}
+
+class _RulebookState extends State<Rulebook> {
+  final controller = PageController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.only(bottom: 80),
+        child: PageView(
+          controller: controller,
+          children: [
+            const RulebookP1(),
+            const RulebookP2(),
+            const RulebookP3(),
+            const RulebookP4(),
+            const RulebookP5(),
+            const RulebookP6(),
+          ],
+        ),
+      ),
+      bottomSheet: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        height: 80,
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {
+                controller.previousPage(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,);
+              },
+              icon: Icon(Icons.keyboard_arrow_left)),
+            Center(
+              child: SmoothPageIndicator(
+                  controller: controller,  // PageController
+                  count:  6,
+                  effect: WormEffect(
+                    spacing: 16,
+                    dotColor: Color(0xFFEDE9D0),
+                    activeDotColor: Color(0xFFA1887F),
+                  ),  // your preferred effect
+                  onDotClicked: (index){
+                  }
+              )
+            ),
+            IconButton(
+                onPressed: () {
+                  controller.nextPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                  );
+                },
+                icon: Icon(Icons.keyboard_arrow_right)),
+          ],
+        ),
+        ),
+      );
+  }
+}
+
