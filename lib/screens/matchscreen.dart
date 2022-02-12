@@ -1553,5 +1553,23 @@ class _MatchScreenState extends State<MatchScreen> {
             },
             child: Text('Cancel'));
   }
+
  Widget showScore(score) => Text("Score: $score", style: TextStyle(color: Colors.white),);
+ Widget buildSetRandomWhite() => FloatingActionButton(
+   backgroundColor: Color(0xFFE27046),
+   child: Text('SET\nRONDOM', style: TextStyle(color: Colors.white)),
+   onPressed: () {
+     print('Random White Set');
+   },
+ );
+  Widget buildSetRandomBlack() => FloatingActionButton(
+    backgroundColor: Color(0xFFE27046),
+    child: Transform(
+        transform: Matrix4.rotationY(math.pi),
+        alignment: Alignment.center,
+        child: Text('SET\nRONDOM', style: TextStyle(color: Colors.white))),
+    onPressed: () {
+      print('Random Black Set');
+    },
+  );
 }
