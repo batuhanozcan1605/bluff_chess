@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+//This widget is not in use now. It will animate the move type on the last moved piece.
 class AnimateMoveType extends StatefulWidget {
   final bool triggerOpacity;
   const AnimateMoveType({Key? key, required this.triggerOpacity}) : super(key: key);
