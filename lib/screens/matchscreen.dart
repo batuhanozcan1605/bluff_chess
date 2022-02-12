@@ -1365,6 +1365,9 @@ class _MatchScreenState extends State<MatchScreen> {
             ),
           ],
         ),
+        floatingActionButton: setUpPhase ? Center(child: whiteTurn ? buildSetRandomWhite() : buildSetRandomBlack())
+            : Container(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
@@ -1555,19 +1558,27 @@ class _MatchScreenState extends State<MatchScreen> {
   }
 
  Widget showScore(score) => Text("Score: $score", style: TextStyle(color: Colors.white),);
- Widget buildSetRandomWhite() => FloatingActionButton(
+ Widget buildSetRandomWhite() => FloatingActionButton.extended(
    backgroundColor: Color(0xFFE27046),
-   child: Text('SET\nRONDOM', style: TextStyle(color: Colors.white)),
+   label: Text('SET\nRONDOM',
+       textAlign: TextAlign.center,
+       style: TextStyle(color: Colors.white, fontSize: 12)),
    onPressed: () {
      print('Random White Set');
    },
  );
-  Widget buildSetRandomBlack() => FloatingActionButton(
-    backgroundColor: Color(0xFFE27046),
-    child: Transform(
-        transform: Matrix4.rotationY(math.pi),
-        alignment: Alignment.center,
-        child: Text('SET\nRONDOM', style: TextStyle(color: Colors.white))),
+  Widget buildSetRandomBlack() => FloatingActionButton.extended(
+    backgroundColor: Color(0xFFFFF4EC),
+    label: Transform(
+      transform: Matrix4.rotationX(math.pi),
+      alignment: Alignment.center,
+      child: Transform(
+          transform: Matrix4.rotationY(math.pi),
+          alignment: Alignment.center,
+          child: Text('SET\nRONDOM',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black87, fontSize: 12))),
+    ),
     onPressed: () {
       print('Random Black Set');
     },
