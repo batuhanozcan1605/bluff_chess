@@ -1577,14 +1577,12 @@ class _MatchScreenState extends State<MatchScreen> {
      setupWhitePawns = Static.setupWhitePawns;
      setUpWhitePieces = Static.setUpWhitePieces;
      for(var i = 24; i < 36; i++){
-       print(i);
        pieces[i][1] = 'x';
        pieces[i][2] = '';
      }
      var listWhitePawn = [for (var i = 24; i <= 29; i++) i];
      var listWhitePieces = [for (var i = 30; i <= 35; i++) i];
      setState(() {
-
        for(var i = 0; i < 3; i++){
           int r = nextRandom(listWhitePawn);
           pieces[r][1] = setupWhitePawns[i][1];
@@ -1615,6 +1613,30 @@ class _MatchScreenState extends State<MatchScreen> {
               style: TextStyle(color: Colors.black87, fontSize: 12))),
     ),
     onPressed: () {
+      setupBlackPawns = Static.setupBlackPawns;
+      setupBlackPieces = Static.setupBlackPieces;
+      for(var i = 0; i < 12; i++){
+        pieces[i][1] = 'x';
+        pieces[i][2] = '';
+      }
+      var listBlackPawn = [for (var i = 6; i <= 11; i++) i];
+      var listBlackPieces = [for (var i = 0; i <= 5; i++) i];
+      setState(() {
+        for(var i = 0; i < 3; i++){
+          int r = nextRandom(listBlackPawn);
+          pieces[r][1] = setupBlackPawns[i][1];
+          pieces[r][2] = setupBlackPawns[i][2];
+          listBlackPawn.remove(r);
+        }
+        for(var i = 0; i < 5; i++){
+          int r = nextRandom(listBlackPieces);
+          pieces[r][1] = setupBlackPieces[i][1];
+          pieces[r][2] = setupBlackPieces[i][2];
+          listBlackPieces.remove(r);
+        }
+      });
+      allBlackPiecesAreOn = true;
+      randomSetBlack = true;
       print('Random Black Set');
     },
   );
