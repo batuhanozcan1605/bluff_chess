@@ -803,7 +803,19 @@ class _MatchScreenState extends State<MatchScreen> {
       }
     }
 
-
+    //down right diagonal
+    if(6 - index % 6 != 1) {
+      if (withinTheBoard(index + 1 * row + 1)) {
+        if (pieces[index + 1 * row + 1][1] != 'x') {
+          if (pieces[index + 1 * row + 1][2] != colorOfCurrentlySelectedPiece) {
+            pieces[index + 1 * row + 1][4] = 'k';
+            pieces[index + 1 * row + 1][5] = 'king';
+          }
+        } else {
+          possibleMoves.add(index + 1 * row + 1);
+        }
+      }
+    }
     setState(() {
       for (int i = 0; i < possibleMoves.length; i++) {
         pieces[possibleMoves[i]][1] = 'o';
@@ -1637,7 +1649,6 @@ class _MatchScreenState extends State<MatchScreen> {
       });
       allBlackPiecesAreOn = true;
       randomSetBlack = true;
-      print('Random Black Set');
     },
   );
 }
