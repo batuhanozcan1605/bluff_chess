@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bluff_chess/static.dart';
 import 'package:bluff_chess/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,12 @@ class _MatchScreenState extends State<MatchScreen> {
   bool allWhitePiecesAreOn = false;
   bool allBlackPiecesAreOn = false;
   bool setUpIsTapped = false;
-
+  //Set Random
+  final _random = Random();
+  int nextRandom(list) => list[_random.nextInt(list.length)];
+  bool randomSetWhite = false;
+  bool randomSetBlack = false;
+  //
   String colorOfCurrentlySelectedPiece = 'white';
   String currentlySelectedPiece = '';
   bool aPieceIsSelected = false;
@@ -218,6 +225,7 @@ class _MatchScreenState extends State<MatchScreen> {
     ['setup', 'pawn', 'white'],
     ['setup', 'pawn', 'white'],
   ];
+
   List setupBlackPawns = [
     ['setup', 'pawn', 'black'],
     ['setup', 'pawn', 'black'],
@@ -1013,7 +1021,6 @@ class _MatchScreenState extends State<MatchScreen> {
     int denum = newWhitePieces ? 15 : 6;
     int denumB = newBlackPieces ? 15 : 6;
 
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.brown[300],
@@ -1365,7 +1372,9 @@ class _MatchScreenState extends State<MatchScreen> {
             ),
           ],
         ),
-        floatingActionButton: setUpPhase ? Center(child: whiteTurn ? buildSetRandomWhite() : buildSetRandomBlack())
+        floatingActionButton: setUpPhase ? Center(child: whiteTurn && !randomSetWhite ? buildSetRandomWhite() :
+              !whiteTurn ? buildSetRandomBlack()
+                  : Container())
             : Container(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
@@ -1558,13 +1567,39 @@ class _MatchScreenState extends State<MatchScreen> {
   }
 
  Widget showScore(score) => Text("Score: $score", style: TextStyle(color: Colors.white),);
+
  Widget buildSetRandomWhite() => FloatingActionButton.extended(
    backgroundColor: Color(0xFFE27046),
    label: Text('SET\nRONDOM',
        textAlign: TextAlign.center,
        style: TextStyle(color: Colors.white, fontSize: 12)),
    onPressed: () {
-     print('Random White Set');
+     setupWhitePawns = Static.setupWhitePawns;
+     setUpWhitePieces = Static.setUpWhitePieces;
+     for(var i = 24; i < 36; i++){
+       print(i);
+       pieces[i][1] = 'x';
+       pieces[i][2] = '';
+     }
+     var listWhitePawn = [for (var i = 24; i <= 29; i++) i];
+     var listWhitePieces = [for (var i = 30; i <= 35; i++) i];
+     setState(() {
+
+       for(var i = 0; i < 3; i++){
+          int r = nextRandom(listWhitePawn);
+          pieces[r][1] = setupWhitePawns[i][1];
+          pieces[r][2] = setupWhitePawns[i][2];
+          listWhitePawn.remove(r);
+       }
+       for(var i = 0; i < 5; i++){
+         int r = nextRandom(listWhitePieces);
+         pieces[r][1] = setUpWhitePieces[i][1];
+         pieces[r][2] = setUpWhitePieces[i][2];
+         listWhitePieces.remove(r);
+       }
+     });
+     allWhitePiecesAreOn = true;
+     randomSetWhite = true;
    },
  );
   Widget buildSetRandomBlack() => FloatingActionButton.extended(

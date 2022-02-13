@@ -21,5 +21,32 @@ class Static {
     35,
   ];
 
+  static const List setupWhitePawns = [
+  ['setup', 'pawn', 'white'],
+  ['setup', 'pawn', 'white'],
+  ['setup', 'pawn', 'white'],
+  ];
+
+  static const List setupBlackPawns = [
+    ['setup', 'pawn', 'black'],
+    ['setup', 'pawn', 'black'],
+    ['setup', 'pawn', 'black'],
+  ];
+
+  static const List setUpWhitePieces = [
+    ['setup', 'bishop', 'white'],
+    ['setup', 'king', 'white'],
+    ['setup', 'knight', 'white'],
+    ['setup', 'queen', 'white'],
+    ['setup', 'rook', 'white'],
+  ];
+
+  static const List setupBlackPieces = [
+    ['setup', 'bishop', 'black'],
+    ['setup', 'king', 'black'],
+    ['setup', 'knight', 'black'],
+    ['setup', 'queen', 'black'],
+    ['setup', 'rook', 'black'],
+  ];
 
 }
