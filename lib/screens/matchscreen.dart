@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:bluff_chess/audio.dart';
 import 'package:bluff_chess/static.dart';
 import 'package:bluff_chess/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,7 @@ class _MatchScreenState extends State<MatchScreen> {
   String cause = "";
   String causeEscape = '';
   bool gameOver = false;
-
+  final Audios audio = Audios();
 
   void showAlertDialog(BuildContext context, cause, whoLost) {
     if(whoLost == 'white' && whiteKingEscaped) {
@@ -247,6 +247,8 @@ class _MatchScreenState extends State<MatchScreen> {
     ['setup', 'queen', 'black'],
     ['setup', 'rook', 'black'],
   ];
+  //AUDIOS
+
 
   // unselect everything
   void unselectEverything() {
@@ -273,6 +275,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
       // if the tapped position is an available move, move the piece to that position
       if (pieces[index][1] == 'o') {
+        audio.playMoveSound();
         setState(() {
           pieces[index][1] = currentlySelectedPiece;
           pieces[index][2] =
