@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:bluff_chess/audio.dart';
+import 'package:bluff_chess/Audios.dart';
 import 'package:bluff_chess/static.dart';
 import 'package:bluff_chess/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -159,6 +159,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
     // show the dialog
     showDialog(
+      barrierColor: Colors.transparent,
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
@@ -397,6 +398,7 @@ class _MatchScreenState extends State<MatchScreen> {
     else {
       // if the tapped position is an available move, move the piece to that position
       if (pieces[index][1] == 'o') {
+        audio.playMoveSound();
         setState(() {
           pieces[index][1] = currentlySelectedPiece;
           pieces[index][2] =
