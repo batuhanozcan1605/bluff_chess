@@ -95,7 +95,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
     //set up score text
     Widget scores = SizedBox(
-        height: 200,
+        height: 250,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1118,6 +1118,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                               setState(() {
                                                 hiddenBlack = true;
                                                 whiteTurn = true;
+                                                unselectEverything();
                                                 if (allWhitePiecesAreOn) {
                                                   setUpPhase = false;
                                                 } //setup finished by black.
@@ -1326,6 +1327,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                           setState(() {
                                             hiddenWhite = true;
                                             whiteTurn = false;
+                                            unselectEverything();
                                             if (allBlackPiecesAreOn) {
                                               setUpPhase = false;
                                             }
