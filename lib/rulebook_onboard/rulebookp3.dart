@@ -33,7 +33,8 @@ class RulebookP3 extends StatelessWidget {
            const Padding(
              padding: EdgeInsets.all(26.0),
              child: Text("In sacrifice, the piece won't be revealed. So you can let escape your king from game secretly."
-                 " If you dare to let escape it and you lost set, you lose the game immediately.",
+                 " If you dare to let escape it and you lost set, you lose the game immediately.\n\n"
+                 "This rule may not be in the online version but it has a point on the same device/table.",
                style: TextStyle(color: Colors.white, fontSize: 16),
              ),
            ),
