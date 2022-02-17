@@ -5,9 +5,6 @@ class RulebookP1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenInfo = MediaQuery.of(context).size;
-    final screenHeight = screenInfo.height;
-    final screenWidth = screenInfo.width;
 
     return Container(
       color: Color(0xFFA1887F),
