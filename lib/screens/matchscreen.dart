@@ -79,6 +79,7 @@ class _MatchScreenState extends State<MatchScreen> {
   String causeEscape = '';
   bool gameOver = false;
   final Audios audio = Audios();
+  bool animation = false;
 
   void showAlertDialog(BuildContext context, cause, whoLost) {
     if(whoLost == 'white' && whiteKingEscaped) {
@@ -407,7 +408,7 @@ class _MatchScreenState extends State<MatchScreen> {
           pieces[indexOfCurrentlySelectedPiece][2] = ' ';
           readMoveType = pieces[index][5];
           indexOfLastMove = index;
-
+          animation = true;
         });
         setState(() {
           whiteTurn = !whiteTurn;
@@ -1230,6 +1231,7 @@ class _MatchScreenState extends State<MatchScreen> {
                           hiddenBlack: hiddenBlack,
                           thisPieceIsSelected: pieces[index][3],
                           singleReveal: singleReveal[index],
+                          animation: index == indexOfLastMove ? animation : false,
                           onTap: () {
 
                             //If you tap on a piece on board after select a piece from setup side.

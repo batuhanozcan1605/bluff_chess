@@ -1,5 +1,5 @@
+import 'package:bluff_chess/widgets/animatemove.dart';
 import 'package:flutter/material.dart';
-import 'animate_movetype.dart';
 import 'ishidden.dart';
 
 class MyPiece extends StatelessWidget {
@@ -21,8 +21,9 @@ class MyPiece extends StatelessWidget {
   //hidden bool
   final bool hiddenBlack;
   final bool hiddenWhite;
-
   final bool singleReveal;
+
+  final bool animation;
 
   MyPiece(
       {required this.piece,
@@ -33,6 +34,7 @@ class MyPiece extends StatelessWidget {
       required this.thisPieceIsSelected,
       required this.killMove,
       required this.singleReveal,
+        required this.animation,
       });
 
   @override
@@ -79,12 +81,17 @@ class MyPiece extends StatelessWidget {
               ? Colors.green[200]
               : Colors.transparent,
           padding: EdgeInsets.all(10),
-          child: IsHidden(
-            hiddenWhite: hiddenWhite,
-            hiddenBlack: hiddenBlack,
-            piece: piece,
-            color: color,
-            singleReveal: singleReveal,),
+          child: Stack(
+            children: [
+                IsHidden(
+                hiddenWhite: hiddenWhite,
+                hiddenBlack: hiddenBlack,
+                piece: piece,
+                color: color,
+                singleReveal: singleReveal,),
+                animation ? AnimateMove() : Center(),
+              ],
+          ),
         ),
       );
     }
