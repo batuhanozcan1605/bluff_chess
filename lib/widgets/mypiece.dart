@@ -9,6 +9,8 @@ class MyPiece extends StatelessWidget {
   // possible kill move
   final String killMove;
 
+  final String moveType;
+
   // black, white
   final String color;
 
@@ -35,6 +37,7 @@ class MyPiece extends StatelessWidget {
       required this.killMove,
       required this.singleReveal,
         required this.animation,
+        required this.moveType,
       });
 
   @override
@@ -89,7 +92,7 @@ class MyPiece extends StatelessWidget {
                 piece: piece,
                 color: color,
                 singleReveal: singleReveal,),
-                animation ? AnimateMove() : Center(),
+                animation ? AnimateMove(color: color, movetype: moveType,) : Center(),
               ],
           ),
         ),

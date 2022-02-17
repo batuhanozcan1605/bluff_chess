@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:math' as math;
 
 class AnimateMove extends StatefulWidget {
-  const AnimateMove({Key? key}) : super(key: key);
+  final String color;
+  final String movetype;
+
+  AnimateMove({required this.color, required this.movetype});
 
   @override
   State<AnimateMove> createState() => _MyStatefulWidgetState();
@@ -31,7 +35,11 @@ class _MyStatefulWidgetState extends State<AnimateMove>
       opacity: _animation,
       child: Padding(
           padding: EdgeInsets.all(8),
-          child: SvgPicture.asset('images/movebishop.svg', color: Colors.grey,),
+          child: widget.color == 'black' ? Transform(
+              transform: Matrix4.rotationX(math.pi),
+              alignment: Alignment.center,
+              child: SvgPicture.asset('images/move' + widget.movetype + '.svg', color: Colors.grey,)) :
+          SvgPicture.asset('images/move' + widget.movetype + '.svg', color: Colors.grey,),
       ),
     );
   }

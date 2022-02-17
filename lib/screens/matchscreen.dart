@@ -1227,6 +1227,7 @@ class _MatchScreenState extends State<MatchScreen> {
                           piece: pieces[index][1],
                           color: pieces[index][2],
                           killMove: pieces[index][4],
+                          moveType: pieces[index][5],
                           hiddenWhite: hiddenWhite,
                           hiddenBlack: hiddenBlack,
                           thisPieceIsSelected: pieces[index][3],
