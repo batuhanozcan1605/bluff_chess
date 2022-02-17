@@ -1,6 +1,7 @@
 import 'package:bluff_chess/rulebook_onboard/rulebook_onboard.dart';
 import 'package:bluff_chess/screens/matchscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -17,17 +18,43 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFEDE9D0),
       appBar: AppBar(
-        backgroundColor: Colors.black87,
-        actions: [
-          IconButton(
+        backgroundColor: Color(0xFFEDE9D0),
+        centerTitle: true,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+          child: SizedBox(
+            width: 40,
+            height: 40,
+              child: SvgPicture.asset('images/logo_front.svg')),
+        ),
+        leadingWidth: 150,
+        leading: Center(
+          child: const Text(
+                  'Bluff Chess',
+                  style: TextStyle(
+                    fontFamily: 'Verdana',
+                    fontSize: 18,
+                    color: Color(0xff0f0e0e),
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+        ),
+         actions: [ IconButton(
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Rulebook()));
-               },
-              icon: Icon(Icons.book_rounded)),
-        ],
+              },
+              icon: Icon(Icons.book_rounded), color: Colors.black87,),
+         ]
       ),
       body: Column(
         children: [
+          Container(
+            height: 50,
+            color: Colors.brown[300],
+            child: Center(child: Text("ALPHA TESTING",
+              style: TextStyle(color: Colors.white,),)),
+          ),
           GestureDetector(
             onTap: () =>
             Navigator.push(context, MaterialPageRoute(
