@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:bluff_chess/Audios.dart';
 import 'package:bluff_chess/static.dart';
 import 'package:bluff_chess/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -1588,7 +1589,33 @@ class _MatchScreenState extends State<MatchScreen> {
             child: Text('Cancel'));
   }
 
- Widget showScore(score) => Text("Score: $score", style: TextStyle(color: Colors.white),);
+ Widget showScore(score) => Row(
+   mainAxisAlignment: MainAxisAlignment.center,
+   children: [
+     Padding(
+       padding: const EdgeInsets.only(right: 8.0),
+       child: Container(
+         height: 20,
+         width: 20,
+         decoration: BoxDecoration(
+           shape: BoxShape.circle,
+           color: score > 0 ? Color(0xFF2F4858) : Color(0xFFFFF4EC),
+         ),
+       ),
+     ),
+     Padding(
+       padding: const EdgeInsets.only(left: 8.0),
+       child: Container(
+         height: 20,
+         width: 20,
+         decoration: BoxDecoration(
+           shape: BoxShape.circle,
+           color: score > 1 ? Color(0xFF2F4858) : Color(0xFFFFF4EC),
+         ),
+       ),
+     ),
+   ],
+ );
 
  Widget buildSetRandomWhite() => FloatingActionButton.extended(
    backgroundColor: Color(0xFFE27046),
