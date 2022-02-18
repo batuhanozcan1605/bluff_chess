@@ -1394,7 +1394,7 @@ class _MatchScreenState extends State<MatchScreen> {
             ),
           ],
         ),
-        floatingActionButton: setUpPhase ? Center(child: whiteTurn && !randomSetWhite ? buildSetRandomWhite() :
+        floatingActionButton: setUpPhase ? Center(child: whiteTurn ? buildSetRandomWhite() :
               !whiteTurn ? buildSetRandomBlack()
                   : Container())
             : Container(),
@@ -1619,7 +1619,6 @@ class _MatchScreenState extends State<MatchScreen> {
        }
      });
      allWhitePiecesAreOn = true;
-     randomSetWhite = true;
    },
  );
   Widget buildSetRandomBlack() => FloatingActionButton.extended(
@@ -1658,7 +1657,6 @@ class _MatchScreenState extends State<MatchScreen> {
         }
       });
       allBlackPiecesAreOn = true;
-      randomSetBlack = true;
     },
   );
 }
