@@ -13,12 +13,40 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
+  void showInfoAboutOnline() {
+
+    Widget ok = TextButton(
+      onPressed: () => Navigator.pop(context),
+      child: Text("OK GOOD LUCK", style: TextStyle(color: Colors.white),),);
+
+    Widget info = Text("We can not provide an online server for now but that's the next main goal of the project.\n\n"
+        "This game can not survive without a community, therefore the next action has been planned as Kickstarter!\n"
+        "If you liked the idea, if the project speaks to you, we will be waiting there for you.", 
+        style: TextStyle(color: Colors.white));
+
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Color(0xFF2F4858),
+      title: Text("THAT'S THE GOAL OF THE PROJECT", style: TextStyle(color: Colors.white),),
+      content: info,
+      actions: [
+        ok,
+      ],
+    );
+    
+    showDialog(
+      context: context, builder: (BuildContext context) {
+      return alert;
+    },
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEDE9D0),
+      backgroundColor: Color(0xFFA1887F),
       appBar: AppBar(
-        backgroundColor: Color(0xFFEDE9D0),
+        backgroundColor: Color(0xA1887F),
         centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
@@ -34,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
                   style: TextStyle(
                     fontFamily: 'Verdana',
                     fontSize: 18,
-                    color: Color(0xff0f0e0e),
+                    color: Color(0xFFEDE9D0),
                     fontWeight: FontWeight.w700,
                   ),
                   textAlign: TextAlign.left,
@@ -44,16 +72,32 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Rulebook()));
               },
-              icon: Icon(Icons.book_rounded), color: Colors.black87,),
+              icon: Icon(Icons.book_rounded), color: Color(0xFFEDE9D0),),
          ]
       ),
       body: Column(
         children: [
           Container(
             height: 50,
-            color: Colors.brown[300],
+            color: Color(0xFFEDE9D0),
             child: Center(child: Text("ALPHA TESTING",
-              style: TextStyle(color: Colors.white,),)),
+              style: TextStyle(color: Colors.black87,),)),
+          ),
+          GestureDetector(
+            onTap: () => showInfoAboutOnline(),
+            child: SizedBox(
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Card(
+                  color: Color(0xFFEDE9D0),
+                  child: Center(
+                    child: Text(">       PLAY ONLINE       <",
+                      style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
+                  ),
+                ),
+              ),
+            ),
           ),
           GestureDetector(
             onTap: () =>
@@ -65,10 +109,10 @@ class _MainScreenState extends State<MainScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Card(
-                  color: Colors.brown[300],
+                  color: Color(0xFFEDE9D0),
                   child: Center(
                     child: Text("PLAY ON THE SAME DEVICE",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+                      style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
                    ),
                 ),
               ),
@@ -84,15 +128,15 @@ class _MainScreenState extends State<MainScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Card(
-                  color: Colors.brown[300],
+                  color: Color(0xFFEDE9D0),
                   child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                        children: [
                          Text("PLAY ON THE SAME DEVICE",
-                           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+                           style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
                          Text("Memory Factor: On",
-                           style: TextStyle(color: Colors.white,),),
+                           style: TextStyle(color: Colors.brown[300],),),
                        ],
                       )
                   ),
