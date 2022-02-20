@@ -43,6 +43,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenInfo = MediaQuery.of(context).size;
+    final screenHeight = screenInfo.height;
+
     return Scaffold(
       backgroundColor: Color(0xFFA1887F),
       appBar: AppBar(
@@ -83,66 +86,71 @@ class _MainScreenState extends State<MainScreen> {
             child: Center(child: Text("ALPHA TESTING",
               style: TextStyle(color: Colors.black87,),)),
           ),
-          GestureDetector(
-            onTap: () => showInfoAboutOnline(),
-            child: SizedBox(
-              height: 200,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                  color: Color(0xFFEDE9D0),
-                  child: Center(
-                    child: Text(">       PLAY ONLINE       <",
-                      style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () => showInfoAboutOnline(),
+                child: SizedBox(
+                  height: screenHeight/4.58,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Card(
+                      color: Color(0xFFEDE9D0),
+                      child: Center(
+                        child: Text(">       PLAY ONLINE       <",
+                          style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () =>
-            Navigator.push(context, MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    MatchScreen(whiteScoreTaken: 0, blackScoreTaken: 0, whiteStarted: true, memoryFactor: false,),)),
-            child: SizedBox(
-              height: 200,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                  color: Color(0xFFEDE9D0),
-                  child: Center(
-                    child: Text("PLAY ON THE SAME DEVICE",
-                      style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
-                   ),
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () =>
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      MatchScreen(whiteScoreTaken: 0, blackScoreTaken: 0, whiteStarted: true, memoryFactor: true,),)),
-            child: SizedBox(
-              height: 200,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                  color: Color(0xFFEDE9D0),
-                  child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Text("PLAY ON THE SAME DEVICE",
-                           style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
-                         Text("Memory Factor: On",
-                           style: TextStyle(color: Colors.brown[300],),),
-                       ],
-                      )
+              GestureDetector(
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          MatchScreen(whiteScoreTaken: 0, blackScoreTaken: 0, whiteStarted: true, memoryFactor: false,),)),
+                child: SizedBox(
+                  height: screenHeight/4.58,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Card(
+                      color: Color(0xFFEDE9D0),
+                      child: Center(
+                        child: Text("PLAY ON THE SAME DEVICE",
+                          style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+              GestureDetector(
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          MatchScreen(whiteScoreTaken: 0, blackScoreTaken: 0, whiteStarted: true, memoryFactor: true,),)),
+                child: SizedBox(
+                  height: screenHeight/4.58,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Card(
+                      color: Color(0xFFEDE9D0),
+                      child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("PLAY ON THE SAME DEVICE",
+                                style: TextStyle(color: Colors.brown[300], fontWeight: FontWeight.bold,),),
+                              Text("Memory Factor: On",
+                                style: TextStyle(color: Colors.brown[300],),),
+                            ],
+                          )
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ]
       ),

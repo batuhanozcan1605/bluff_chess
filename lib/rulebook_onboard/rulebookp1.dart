@@ -5,6 +5,8 @@ class RulebookP1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenInfo = MediaQuery.of(context).size;
+    final screenHeight = screenInfo.height;
 
     return Container(
       color: Color(0xFFA1887F),
@@ -17,7 +19,7 @@ class RulebookP1 extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(26.0),
+                  padding: EdgeInsets.all(screenHeight/35.2),
                   child: Text("Bluff chess is a chess-based game that includes bluff mechanics.\n\n"
                       "Non-pawn pieces start to game face-down and they may act like another piece as long as they have not caught. "
                       "So, each move claims a piece.\n"
@@ -25,7 +27,7 @@ class RulebookP1 extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 16),),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(26.0),
+                  padding: EdgeInsets.all(screenHeight/35.2),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
