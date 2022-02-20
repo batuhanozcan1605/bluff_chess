@@ -1,7 +1,5 @@
 import 'package:bluff_chess/screens/mainscreen.dart';
-import 'package:bluff_chess/screens/splash.dart';
 import 'package:flutter/material.dart';
-import 'screens/matchscreen.dart';
 
 void main() {
   //WidgetsFlutterBinding.ensureInitialized();
