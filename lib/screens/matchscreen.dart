@@ -420,6 +420,7 @@ class _MatchScreenState extends State<MatchScreen> {
       }
       // if the tapped position is a kill move, move the piece to that position. (kill position)
       else if (pieces[index][4] == 'k') {
+        audio.playMoveSound();
         setState(() {
           killTry = true; //shows the NO button
 

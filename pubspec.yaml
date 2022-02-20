@@ -39,6 +39,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.0.4
+flutter_native_splash:
+  image: assets/logo_splash.png
+  color: "#ede9d0"
+
   flutter_launcher_icons: "^0.9.1"
 
 flutter_icons:
