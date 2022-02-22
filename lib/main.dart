@@ -2,8 +2,6 @@ import 'package:bluff_chess/screens/mainscreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -16,7 +14,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.brown,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            //elevation: 8,
             primary: Colors.black87,
             onPrimary: Colors.white,
         ),

@@ -8,7 +8,6 @@ class Audios {
   int randomSound() => _random.nextInt(2);
 
   void playMoveSound() {
-    print('girdi');
     int r = randomSound();
     print(r);
     print(moveSounds[r]);

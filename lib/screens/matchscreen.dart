@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:bluff_chess/Audios.dart';
 import 'package:bluff_chess/static.dart';
 import 'package:bluff_chess/widgets/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
