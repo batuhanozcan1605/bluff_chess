@@ -13,7 +13,6 @@ class MatchScreen extends StatefulWidget {
 
   MatchScreen({required this.whiteScoreTaken, required this.blackScoreTaken, required this.whiteStarted, required this.memoryFactor});
 
-
   @override
   _MatchScreenState createState() => _MatchScreenState();
 }
