@@ -433,7 +433,7 @@ class _MatchScreenState extends State<MatchScreen> {
           pieces[indexOfCurrentlySelectedPiece][2] = ' ';
           readMoveType = pieces[index][5];
           indexOfLastMove = index;
-
+          animation = true;
           readPieceForBluff = currentlySelectedPiece;
           whiteTurn = !whiteTurn;
           bluffTime = true;
