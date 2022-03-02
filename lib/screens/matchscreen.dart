@@ -77,10 +77,19 @@ class _MatchScreenState extends State<MatchScreen> {
   String cause = "";
   String causeEscape = '';
   bool gameOver = false;
+  bool setOver = false;
   final Audios audio = Audios();
   bool animation = false;
 
+  String tempCause = '';
+  String tempWhoLost = '';
+
   void showAlertDialog(BuildContext context, cause, whoLost) {
+    setState(() {
+      setOver = true;
+      tempCause = cause;
+      tempWhoLost = whoLost;
+    });
     if(whoLost == 'white' && whiteKingEscaped) {
        blackScore = 2;
        causeEscape = 'White king was escaped secretly, plus White lost the set. It means White lost the game.';
@@ -160,7 +169,6 @@ class _MatchScreenState extends State<MatchScreen> {
     // show the dialog
     showDialog(
       barrierColor: Colors.transparent,
-      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return alert;
@@ -1234,7 +1242,9 @@ class _MatchScreenState extends State<MatchScreen> {
                           singleReveal: singleReveal[index],
                           animation: index == indexOfLastMove ? animation : false,
                           onTap: () {
-
+                            if(setOver == true){
+                              return;
+                            }
                             //If you tap on a piece on board after select a piece from setup side.
                             if (pieces[index][1] != 'o' &&
                                 pieces[index][1] != 'x' &&
@@ -1364,6 +1374,10 @@ class _MatchScreenState extends State<MatchScreen> {
                                 !bluffTime && whiteTurn && aPieceIsSelected && !killTry
                                     ? SizedBox(height: screenHeight/25,
                                       child: claimKing())
+                                    : setOver ? ElevatedButton(
+                                      onPressed: () {
+                                      showAlertDialog(context, tempCause, tempWhoLost);
+                                      }, child: Text("NEXT"))
                                     : Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
