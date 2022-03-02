@@ -1,3 +1,4 @@
+import 'package:bluff_chess/widgets/animatemove.dart';
 import 'package:flutter/material.dart';
 
 class RulebookP6 extends StatelessWidget {
@@ -21,6 +22,24 @@ class RulebookP6 extends StatelessWidget {
                child: Text("When you hold your finger on the eye icon, "
                    "you can see your secret pieces.\n\nThat's the play mode without memory factor."
                    "\n\nIf you want the memory as a factor in game, you can play with Memory Factor: On.",
+                   style: TextStyle(color: Colors.white,fontSize: 16)),
+             ),
+             Text("ANIMATION", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22)),
+             Padding(
+               padding: const EdgeInsets.only(top: 18.0),
+               child: SizedBox(
+                 height: 50,
+                 child: Stack(
+                   alignment: Alignment.center,
+                     children: [
+                   Image.asset("images/emptywhite.png"),
+                   AnimateMove(color: 'white', movetype: 'rook'),
+                 ]),
+               ),
+             ),
+             Padding(
+               padding: EdgeInsets.all(26.0),
+               child: Text("Animation appears as what kind of move have you performed. Which piece have you claimed, in other word.",
                    style: TextStyle(color: Colors.white,fontSize: 16)),
              ),
             ],
