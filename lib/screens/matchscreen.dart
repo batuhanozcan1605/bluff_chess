@@ -1351,7 +1351,7 @@ class _MatchScreenState extends State<MatchScreen> {
                               ),
                       )
                     : Row(children: [
-                        SizedBox(
+                          SizedBox(
                             width: screenHeight/screenWidth > 1.94 ? screenWidth / 2 : screenWidth / 2.5,
                             child: Padding(
                               padding: EdgeInsets.only(bottom: screenHeight/32),
