@@ -43,13 +43,11 @@ class _RulebookState extends State<Rulebook> {
         child:  Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
+            TextButton(
               onPressed: () {
-                controller.previousPage(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,);
+                controller.jumpToPage(6);
               },
-              icon: Icon(Icons.keyboard_arrow_left)),
+              child: Text("SKIP", style: TextStyle(color: Color(0xFFA1887F)))),
             Center(
               child: SmoothPageIndicator(
                   controller: controller,  // PageController

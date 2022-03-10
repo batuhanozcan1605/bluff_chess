@@ -1,5 +1,7 @@
+import 'package:bluff_chess/screens/mainscreen.dart';
 import 'package:bluff_chess/widgets/animatemove.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RulebookP6 extends StatelessWidget {
   const RulebookP6({Key? key}) : super(key: key);
@@ -39,8 +41,19 @@ class RulebookP6 extends StatelessWidget {
              ),
              Padding(
                padding: EdgeInsets.all(26.0),
-               child: Text("Animation appears as what kind of move have you performed. Which piece have you claimed, in other word.",
+               child: Text("Animation appears as what kind of move have you performed. Which piece have you claimed, in other words.",
                    style: TextStyle(color: Colors.white,fontSize: 16)),
+             ),
+             Padding(
+               padding: EdgeInsets.all(26.0),
+               child: TextButton(
+                 onPressed: () async {
+                   final prefs = await SharedPreferences.getInstance();
+                   prefs.setBool('showHome', true);
+                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
+                 },
+                 child: Text("Get Started",style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF2F4858),fontSize: 26)),
+                   ),
              ),
             ],
           ),

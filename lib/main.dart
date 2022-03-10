@@ -1,11 +1,22 @@
+import 'package:bluff_chess/rulebook_onboard/rulebook_onboard.dart';
 import 'package:bluff_chess/screens/mainscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+  final showHome = prefs.getBool('showHome') ?? false;
+
+  runApp(MyApp(showHome: showHome));
 }
 
 class MyApp extends StatelessWidget {
+  final bool showHome;
+
+  const MyApp({required this.showHome});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       ),
-      home: MainScreen(),
+      home: showHome ? MainScreen() : Rulebook(),
     );
   }
 }

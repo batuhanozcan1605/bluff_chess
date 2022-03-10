@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.0.13
   smooth_page_indicator: ^1.0.0
   audioplayers: ^0.20.1
   flutter_svg: ^1.0.3
