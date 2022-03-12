@@ -45,7 +45,7 @@ class _RulebookState extends State<Rulebook> {
           children: [
             TextButton(
               onPressed: () {
-                controller.jumpToPage(6);
+                controller.jumpToPage(5);
               },
               child: Text("SKIP", style: TextStyle(color: Color(0xFFA1887F)))),
             Center(
