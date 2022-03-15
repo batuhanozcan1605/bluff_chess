@@ -1166,9 +1166,10 @@ class _MatchScreenState extends State<MatchScreen> {
                                         transform: Matrix4.rotationY(math.pi),
                                         alignment: Alignment.center,
                                         child: showScore(blackScore)),
-                                    memoryFactor == false && !whiteTurn
+                                    memoryFactor == false && !whiteTurn && setOver == false
                                         ? showMyPieces(screenHeight, screenWidth)
                                         : Container(),
+                                    setOver ? showMyPieces(screenHeight, screenWidth) : Center(),
                                     !bluffTime && !whiteTurn && aPieceIsSelected && !killTry
                                         ? Transform(
                                             transform: Matrix4.rotationY(math.pi),
@@ -1191,7 +1192,6 @@ class _MatchScreenState extends State<MatchScreen> {
                                                           child: noButton()),
                                                       visible: bluffTime &&
                                                               !whiteTurn &&
-                                                              killTry &&
                                                               !bluffClaimed ? true : false)),
                                               SizedBox(width: screenHeight/91.5),
                                               SizedBox(
@@ -1368,16 +1368,21 @@ class _MatchScreenState extends State<MatchScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 showScore(whiteScore),
-                                memoryFactor == false && whiteTurn
+                                memoryFactor == false && whiteTurn && setOver == false
                                     ? showMyPieces(screenHeight, screenWidth)
                                     : Container(),
                                 !bluffTime && whiteTurn && aPieceIsSelected && !killTry
                                     ? SizedBox(height: screenHeight/25,
                                       child: claimKing())
-                                    : setOver ? ElevatedButton(
-                                      onPressed: () {
-                                      showAlertDialog(context, tempCause, tempWhoLost);
-                                      }, child: Text("NEXT"))
+                                    : setOver ? Column(
+                                      children: [
+                                          showMyPieces(screenHeight, screenWidth),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                              showAlertDialog(context, tempCause, tempWhoLost);
+                                             }, child: Text("NEXT")),
+                                        ],
+                                    )
                                     : Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -1395,7 +1400,6 @@ class _MatchScreenState extends State<MatchScreen> {
                                                   child: noButton(),
                                                   visible: bluffTime &&
                                                           whiteTurn &&
-                                                          killTry &&
                                                           !bluffClaimed ? true : false)),
                                         ],
                                       ),
@@ -1421,31 +1425,46 @@ class _MatchScreenState extends State<MatchScreen> {
     return GestureDetector(
         onTapDown: (TapDownDetails tapDownDetails) {
           setState(() {
-            if (whiteTurn) {
+            if (setOver){
               hiddenWhite = !hiddenWhite;
-            }
-            if (!whiteTurn) {
               hiddenBlack = !hiddenBlack;
+            } else {
+              if (whiteTurn) {
+                hiddenWhite = !hiddenWhite;
+              }
+              if (!whiteTurn) {
+                hiddenBlack = !hiddenBlack;
+              }
             }
           });
         },
         onTapCancel: () {
           setState(() {
+            if (setOver){
+              hiddenWhite = !hiddenWhite;
+              hiddenBlack = !hiddenBlack;
+            } else {
             if (whiteTurn) {
               hiddenWhite = !hiddenWhite;
             }
             if (!whiteTurn) {
               hiddenBlack = !hiddenBlack;
+             }
             }
           });
         },
         onTapUp: (TapUpDetails tapUpDetails) {
           setState(() {
-            if (whiteTurn) {
+            if (setOver){
               hiddenWhite = !hiddenWhite;
-            }
-            if (!whiteTurn) {
               hiddenBlack = !hiddenBlack;
+            }else{
+              if (whiteTurn) {
+                hiddenWhite = !hiddenWhite;
+              }
+              if (!whiteTurn) {
+                hiddenBlack = !hiddenBlack;
+              }
             }
           });
         },
@@ -1532,38 +1551,44 @@ class _MatchScreenState extends State<MatchScreen> {
   Widget noButton() => ElevatedButton(
       onPressed: () {
         setState(() {
-          if (tempColor == 'white') {
-            deadWhitePieces.add([tempPiece, tempColor]);
-            if (tempPiece == 'king') {
+          if(killTry) {
+            if (tempColor == 'white') {
+              deadWhitePieces.add([tempPiece, tempColor]);
+              if (tempPiece == 'king') {
                 blackScore = blackScore + 1;
-              showAlertDialog(context, 'The White King is dead', 'white');
-            }
-            if (tempPiece == 'queen') {
-              deadBlackPieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
-              if(pieces[indexOfLastMove][1] == 'king') {
+                showAlertDialog(context, 'The White King is dead', 'white');
+              }
+              if (tempPiece == 'queen') {
+                deadBlackPieces.add(
+                    [pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
+                if (pieces[indexOfLastMove][1] == 'king') {
                   whiteScore = whiteScore + 1;
-                showAlertDialog(context, "Queen's revenge! Black king is dead.", 'black');
+                  showAlertDialog(
+                      context, "Queen's revenge! Black king is dead.", 'black');
+                }
+                pieces[indexOfLastMove][1] = 'x';
+                pieces[indexOfLastMove][2] = '';
               }
-              pieces[indexOfLastMove][1] = 'x';
-              pieces[indexOfLastMove][2] = '';
-            }
-          } else if (tempColor == 'black') {
-            deadBlackPieces.add([tempPiece, tempColor]);
-            if (tempPiece == 'king') {
+            } else if (tempColor == 'black') {
+              deadBlackPieces.add([tempPiece, tempColor]);
+              if (tempPiece == 'king') {
                 whiteScore = whiteScore + 1;
-              showAlertDialog(context, 'The Black King is dead', 'black');
-            }
-            if (tempPiece == 'queen') {
-              deadWhitePieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
-              if(pieces[indexOfLastMove][1] == 'king') {
-                  blackScore = blackScore + 1;
-                showAlertDialog(context, "Queen's revenge! White king is dead." ,'white');
+                showAlertDialog(context, 'The Black King is dead', 'black');
               }
-              pieces[indexOfLastMove][1] = 'x';
-              pieces[indexOfLastMove][2] = '';
+              if (tempPiece == 'queen') {
+                deadWhitePieces.add(
+                    [pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
+                if (pieces[indexOfLastMove][1] == 'king') {
+                  blackScore = blackScore + 1;
+                  showAlertDialog(
+                      context, "Queen's revenge! White king is dead.", 'white');
+                }
+                pieces[indexOfLastMove][1] = 'x';
+                pieces[indexOfLastMove][2] = '';
+              }
             }
+            checkDeadPieceCount();
           }
-          checkDeadPieceCount();
           unselectEverything();
           aPieceIsSelected = false;
           killTry = false;
