@@ -1061,57 +1061,54 @@ class _MatchScreenState extends State<MatchScreen> {
                 child: setUpPhase
                     ? Container(
                         child: allBlackPiecesAreOn == false
-                            ? Padding(
-                                padding: EdgeInsets.only(
-                                    left: screenWidth / denumB.toDouble()),
-                                child: ListView.separated(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return SizedBox(
-                                      width: screenWidth / denumB,
-                                    );
+                            ? ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return SizedBox(
+                                  width: screenWidth / denumB,
+                                );
+                              },
+                              itemCount: listBlack.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    if (whiteTurn == false) {
+                                      onTappedSetup(index, listBlack);
+                                      _onSelected(index);
+                                    }
                                   },
-                                  itemCount: listBlack.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        if (whiteTurn == false) {
-                                          onTappedSetup(index, listBlack);
-                                          _onSelected(index);
-                                        }
-                                      },
-                                      child: Stack(
+                                  child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Container(
+                                          width: 50,
+                                          height: 50,
                                           alignment: Alignment.center,
-                                          children: [
-                                            Container(
-                                              width: 50,
-                                              height: 50,
+                                          decoration: BoxDecoration(
+                                              color: _selectedIndex != null &&
+                                                      _selectedIndex == index &&
+                                                      whiteTurn == false
+                                                  ? Colors.green[200]
+                                                  : Colors.transparent,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8))),
+                                        ),
+                                        SizedBox(
+                                          width: 50,
+                                          child: Transform(
+                                              transform:
+                                                  Matrix4.rotationX(math.pi),
                                               alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                  color: _selectedIndex != null &&
-                                                          _selectedIndex == index &&
-                                                          whiteTurn == false
-                                                      ? Colors.green[200]
-                                                      : Colors.transparent,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(8))),
-                                            ),
-                                            SizedBox(
-                                              width: 50,
-                                              child: Transform(
-                                                  transform:
-                                                      Matrix4.rotationX(math.pi),
-                                                  alignment: Alignment.center,
-                                                  child: Image.asset(
-                                                      "images/${listBlack[index][1] + listBlack[index][2]}.png")),
-                                            ),
-                                          ]),
-                                    );
-                                  },
-                                ),
-                              )
+                                              child: Image.asset(
+                                                  "images/${listBlack[index][1] + listBlack[index][2]}.png")),
+                                        ),
+                                      ]),
+                                );
+                              },
+                            )
                             : Container(
                                 alignment: Alignment.center,
                                 height: screenHeight/11.44,
@@ -1146,7 +1143,7 @@ class _MatchScreenState extends State<MatchScreen> {
                         child: Row(
                           children: [
                             SizedBox(
-                              width: screenHeight/screenWidth > 1.94 ? screenWidth / 2 : screenWidth / 2.5,
+                              width: screenHeight/screenWidth > 1.94 ? screenWidth / 2 : screenWidth / 2.7,
                               child: Padding(
                                 padding: EdgeInsets.only(bottom: screenHeight/32),
                                 child: PlayerSideBlack(deadBlackPieces),
@@ -1286,51 +1283,49 @@ class _MatchScreenState extends State<MatchScreen> {
                 child: setUpPhase
                     ? Container(
                         child: allWhitePiecesAreOn == false
-                            ? Padding(
-                                padding: EdgeInsets.only(
-                                    left: screenWidth / denum.toDouble()),
-                                child: ListView.separated(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return SizedBox(
-                                      width: screenWidth / denum,
-                                    );
+                            ? ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return SizedBox(
+                                  width: screenWidth / denum,
+                                );
+                              },
+                              itemCount: listWhite.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    if (whiteTurn) {
+                                      onTappedSetup(index, listWhite);
+                                      _onSelected(index);
+                                    }
                                   },
-                                  itemCount: listWhite.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        if (whiteTurn) {
-                                          onTappedSetup(index, listWhite);
-                                          _onSelected(index);
-                                        }
-                                      },
-                                      child: Stack(
+                                  child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Container(
                                           alignment: Alignment.center,
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.center,
-                                              height: 50,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                  color: _selectedIndex != null &&
-                                                          _selectedIndex == index &&
-                                                          whiteTurn
-                                                      ? Colors.green[200]
-                                                      : Colors.transparent,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(12))),
-                                            ),
-                                            SizedBox(
-                                                width: 50,
-                                                child: Image.asset(
-                                                    "images/${listWhite[index][1] + listWhite[index][2]}.png")),
-                                          ]),
-                                    );
-                                  },
-                                ))
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(
+                                              color: _selectedIndex != null &&
+                                                      _selectedIndex == index &&
+                                                      whiteTurn
+                                                  ? Colors.green[200]
+                                                  : Colors.transparent,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12))),
+                                        ),
+                                        SizedBox(
+                                            width: 50,
+                                            child: Image.asset(
+                                                "images/${listWhite[index][1] + listWhite[index][2]}.png")),
+                                      ]),
+                                );
+                              },
+                            )
                             : Container(
                                 alignment: Alignment.center,
                                 height: screenHeight/11.44,
@@ -1352,7 +1347,7 @@ class _MatchScreenState extends State<MatchScreen> {
                       )
                     : Row(children: [
                           SizedBox(
-                            width: screenHeight/screenWidth > 1.94 ? screenWidth / 2 : screenWidth / 2.5,
+                            width: screenHeight/screenWidth > 1.94 ? screenWidth / 2 : screenWidth / 2.7,
                             child: Padding(
                               padding: EdgeInsets.only(bottom: screenHeight/32),
                               child: PlayerSideWhite(deadWhitePieces),
@@ -1377,10 +1372,13 @@ class _MatchScreenState extends State<MatchScreen> {
                                     : setOver ? Column(
                                       children: [
                                           showMyPieces(screenHeight, screenWidth),
-                                          ElevatedButton(
-                                              onPressed: () {
-                                              showAlertDialog(context, tempCause, tempWhoLost);
-                                             }, child: Text("NEXT")),
+                                          SizedBox(
+                                            height: screenHeight/screenWidth < 1.94 ? 20 : 30,
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                showAlertDialog(context, tempCause, tempWhoLost);
+                                               }, child: Text("NEXT")),
+                                          ),
                                         ],
                                     )
                                     : Row(
