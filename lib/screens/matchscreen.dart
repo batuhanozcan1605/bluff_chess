@@ -66,7 +66,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
   int indexOfLastMove = -1;
   var singleReveal = List<bool>.filled(36, false, growable: false);
- // var triggerOpacity = List<bool>.filled(36, false, growable: false);
+  // var triggerOpacity = List<bool>.filled(36, false, growable: false);
 
   // dead pieces
   var deadWhitePieces = [];
@@ -101,7 +101,6 @@ class _MatchScreenState extends State<MatchScreen> {
     if(whiteScore == 2 || blackScore == 2) {
       gameOver = true;
     }
-
     //set up score text
     Widget scores = SizedBox(
         height: 250,
@@ -1024,6 +1023,89 @@ class _MatchScreenState extends State<MatchScreen> {
     }
   }
 
+  bool checkDrawCondition() {
+    if(bluffClaimed){
+      print('girdi, bluffclaimed checkte');
+      print('lenght ${deadWhitePieces.length}');
+      print('lenght ${deadBlackPieces.length}');
+      if (tempColor == 'white') {
+        if (deadWhitePieces.length == 4) {
+          if (deadBlackPieces.length == 5 || pieces[indexOfLastMove][1] == 'king') {
+            print("girdi,true");
+            return true;
+          } else {
+            print("girdi, ama true deil");
+            return false;
+          }
+        } else {
+          print("ölüler 4 değil");
+          return false;
+        }
+      } else {
+        if (deadBlackPieces.length == 4) {
+          if (deadWhitePieces.length == 5 || pieces[indexOfLastMove][1] == 'king') {
+            print("girdi,true");
+            return true;
+          } else {
+            print("girdi, ama true deil");
+            return false;
+          }
+        } else {
+          print("ölüler 4 değil");
+          return false;
+        }
+      }
+    }
+
+    //no button
+    print('girdi, checkte');
+    print('lenght ${deadWhitePieces.length}');
+    print('lenght ${deadBlackPieces.length}');
+    if (tempColor == 'white') {
+      if (deadWhitePieces.length == 5) {
+        if (deadBlackPieces.length == 4 || pieces[indexOfLastMove][1] == 'king') {
+          print("girdi,true");
+          return true;
+        } else {
+          print("girdi, ama true deil");
+          return false;
+        }
+      } else {
+        print("ölüler 4 değil");
+        return false;
+      }
+    } else {
+      if (deadBlackPieces.length == 5) {
+        if (deadWhitePieces.length == 4 || pieces[indexOfLastMove][1] == 'king') {
+          print("girdi,true");
+          return true;
+        } else {
+          print("girdi, ama true deil");
+          return false;
+        }
+      } else {
+        print("ölüler 4 değil");
+        return false;
+      }
+    }
+  }
+
+  void executeDraw(){
+    if(bluffClaimed){
+      showAlertDialog(context, 'The set is Draw! Queen has torn apart the opponent with itself at the last moment.', 'draw');
+      return;
+    }
+    showAlertDialog(context, 'The set is Draw! Queen has torn apart the opponent with itself at the last moment.', 'draw');
+    if(tempColor == 'white'){
+      deadBlackPieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
+    }
+    if(tempColor == 'black') {
+      deadWhitePieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
+    }
+    pieces[indexOfLastMove][1] = 'x';
+    pieces[indexOfLastMove][2] = '';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -1515,6 +1597,12 @@ class _MatchScreenState extends State<MatchScreen> {
                 deadBlackPieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
                 pieces[indexOfLastMove][1] = 'x';
                 pieces[indexOfLastMove][2] = '';
+                bool checkDraw = checkDrawCondition();
+                if(checkDraw){
+                  deadWhitePieces.add([tempPiece, tempColor]);
+                  executeDraw();
+                  return;
+                }
               }
               deadWhitePieces.add([tempPiece, tempColor]);
             }
@@ -1536,6 +1624,12 @@ class _MatchScreenState extends State<MatchScreen> {
                 deadWhitePieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
                 pieces[indexOfLastMove][1] = 'x';
                 pieces[indexOfLastMove][2] = '';
+                bool checkDraw = checkDrawCondition();
+                if(checkDraw){
+                  deadBlackPieces.add([tempPiece, tempColor]);
+                  executeDraw();
+                  return;
+                }
               }
               deadBlackPieces.add([tempPiece, tempColor]);
             }
@@ -1557,8 +1651,12 @@ class _MatchScreenState extends State<MatchScreen> {
                 showAlertDialog(context, 'The White King is dead', 'white');
               }
               if (tempPiece == 'queen') {
-                deadBlackPieces.add(
-                    [pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
+                bool checkDraw = checkDrawCondition();
+                if(checkDraw){
+                  executeDraw();
+                  return;
+                }
+                deadBlackPieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
                 if (pieces[indexOfLastMove][1] == 'king') {
                   whiteScore = whiteScore + 1;
                   showAlertDialog(
@@ -1567,6 +1665,7 @@ class _MatchScreenState extends State<MatchScreen> {
                 pieces[indexOfLastMove][1] = 'x';
                 pieces[indexOfLastMove][2] = '';
               }
+
             } else if (tempColor == 'black') {
               deadBlackPieces.add([tempPiece, tempColor]);
               if (tempPiece == 'king') {
@@ -1574,8 +1673,13 @@ class _MatchScreenState extends State<MatchScreen> {
                 showAlertDialog(context, 'The Black King is dead', 'black');
               }
               if (tempPiece == 'queen') {
-                deadWhitePieces.add(
-                    [pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
+                bool checkDraw = checkDrawCondition();
+                if(checkDraw){
+                  print('draw condition');
+                  executeDraw();
+                  return;
+                }
+                deadWhitePieces.add([pieces[indexOfLastMove][1], pieces[indexOfLastMove][2]]);
                 if (pieces[indexOfLastMove][1] == 'king') {
                   blackScore = blackScore + 1;
                   showAlertDialog(
