@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
           Container(
             height: 50,
             color: Color(0xFFEDE9D0),
-            child: Center(child: Text("ALPHA TESTING",
+            child: Center(child: Text("BETA TESTING",
               style: TextStyle(color: Colors.black87,),)),
           ),
           Column(

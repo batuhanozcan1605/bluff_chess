@@ -5,16 +5,20 @@ class RulebookP2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenInfo = MediaQuery.of(context).size;
+    final screenHeight = screenInfo.height;
+    final screenWidth = screenInfo.width;
     return Container(
       color: const Color(0xFFA1887F),
       child: Center(
         child:
             Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     "THE GOAL",
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,
+                        fontSize: screenHeight/screenWidth > 1.94 ? 22 : 18),
                   ),
                   Padding(
                     padding: EdgeInsets.all(26.0),

@@ -22,9 +22,11 @@ class _RulebookState extends State<Rulebook> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenInfo = MediaQuery.of(context).size;
+    final screenHeight = screenInfo.height;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(bottom: 80),
+        padding: EdgeInsets.only(bottom: screenHeight/11.43),
         child: PageView(
           controller: controller,
           children: [
@@ -39,7 +41,7 @@ class _RulebookState extends State<Rulebook> {
       ),
       bottomSheet: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        height: 80,
+        height: screenHeight/11.43,
         child:  Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

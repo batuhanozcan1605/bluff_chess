@@ -7,6 +7,7 @@ class RulebookP1 extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenInfo = MediaQuery.of(context).size;
     final screenHeight = screenInfo.height;
+    final screenWidth = screenInfo.width;
 
     return Container(
       color: Color(0xFFA1887F),
@@ -16,7 +17,8 @@ class RulebookP1 extends StatelessWidget {
               children: [
                 Text(
                   "BLUFF CHESS",
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,
+                      fontSize: screenHeight/screenWidth > 1.94 ? 22 : 18),
                 ),
                 Padding(
                   padding: EdgeInsets.all(screenHeight/35.2),
@@ -32,54 +34,54 @@ class RulebookP1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width: screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/emptywhite.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/emptyblack.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/pawnwhite.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/pawnblack.png')),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(26.0),
+                  padding: EdgeInsets.all(screenHeight/35.19),
                   child: Text("Pawns are fixed walls that can not move or capture. They are always visible. The other pieces are:",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: screenHeight/screenWidth > 1.94 ? 16 : 12),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(26.0),
+                  padding: EdgeInsets.all(screenHeight/35.19),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/rookwhite.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/knightwhite.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/bishopwhite.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/kingwhite.png')),
                       SizedBox(
-                          width: 50,
-                          height: 50,
+                          width:  screenHeight/18.3,
+                          height:  screenHeight/18.3,
                           child: Image.asset('images/queenwhite.png')),
 
                     ],

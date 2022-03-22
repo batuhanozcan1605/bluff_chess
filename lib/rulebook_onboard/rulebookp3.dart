@@ -5,6 +5,8 @@ class RulebookP3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenInfo = MediaQuery.of(context).size;
+    final screenHeight = screenInfo.height;
     return Container(
         color: const Color(0xFFA1887F),
       child: Center(
@@ -16,18 +18,18 @@ class RulebookP3 extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
           ),
            Padding(
-             padding: EdgeInsets.all(26),
+             padding: EdgeInsets.all(screenHeight/35.2),
              child: Text("After any move of opponent, you can claim bluff.\n\n"
                  "If you caught a bluffed move, that piece is captured."
                  " However, if the move was not a bluff, it stays there and you sacrifice one piece as penalty.",
                style: TextStyle(color: Colors.white, fontSize: 16),),
            ),
              SizedBox(
-               height: 50,
-               width: 100,
+               height: screenHeight/18.3,
+               width: screenHeight/18.3*2,
                child: ElevatedButton(
                  onPressed: (){},
-                 child: Text("Claim\nBluff"),
+                 child: Text("Claim\nBluff", style: TextStyle(fontSize: screenHeight/57.19),),
                ),
              ),
            const Padding(
