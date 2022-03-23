@@ -1029,7 +1029,7 @@ class _MatchScreenState extends State<MatchScreen> {
       print('lenght ${deadWhitePieces.length}');
       print('lenght ${deadBlackPieces.length}');
       if (tempColor == 'white') {
-        if (deadWhitePieces.length == 4) {
+        if (deadWhitePieces.length == 4 || deadWhitePieces.length == 3) {
           if (deadBlackPieces.length == 5 || pieces[indexOfLastMove][1] == 'king') {
             print("girdi,true");
             return true;
@@ -1042,7 +1042,7 @@ class _MatchScreenState extends State<MatchScreen> {
           return false;
         }
       } else {
-        if (deadBlackPieces.length == 4) {
+        if (deadBlackPieces.length == 4 || deadBlackPieces.length == 3) {
           if (deadWhitePieces.length == 5 || pieces[indexOfLastMove][1] == 'king') {
             print("girdi,true");
             return true;
@@ -1092,6 +1092,15 @@ class _MatchScreenState extends State<MatchScreen> {
 
   void executeDraw(){
     if(bluffClaimed){
+      if(deadWhitePieces.length == 4){
+        sacrificeWhite();
+        showAlertDialog(context, 'White claimed bluff for a legal move! After the sacrifice penalty, both side have 3 pieces. The set is a draw.', 'draw');
+        return;
+      } else if(deadBlackPieces.length == 4) {
+        sacrificeBlack();
+        showAlertDialog(context, 'Black claimed bluff for a legal move! After the sacrifice penalty, oth side have 3 pieces. The set is a draw.', 'draw');
+        return;
+      }
       showAlertDialog(context, 'The set is Draw! Queen has torn apart the opponent with itself at the last moment.', 'draw');
       return;
     }
