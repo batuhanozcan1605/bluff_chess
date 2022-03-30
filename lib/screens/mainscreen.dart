@@ -2,6 +2,7 @@ import 'package:bluff_chess/rulebook_onboard/rulebook_onboard.dart';
 import 'package:bluff_chess/screens/matchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -70,11 +71,21 @@ class _MainScreenState extends State<MainScreen> {
                   textAlign: TextAlign.left,
                 ),
         ),
-         actions: [ IconButton(
+         actions: [
+           GestureDetector(
+               onTap: () async {
+                 await launch('https://discord.gg/2GqUd2VF');
+               },
+               child: SizedBox(
+                   width: screenHeight/30.5,
+                   height: screenHeight/30.5,
+                   child: Image.asset('images/discord-mascot.png'))),
+           IconButton(
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Rulebook()));
               },
               icon: Icon(Icons.book_rounded), color: Color(0xFFEDE9D0),),
+
          ]
       ),
       body: Column(
