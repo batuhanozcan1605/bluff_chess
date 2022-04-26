@@ -42,12 +42,15 @@ class MyPiece extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenInfo = MediaQuery.of(context).size;
+    final screenWidth = screenInfo.width;
+    final screenHeight = screenInfo.height;
     // possible kill move
     if (killMove == 'k') {
       return GestureDetector(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: EdgeInsets.all(screenWidth/82),
           child: Container(
             color: Colors.red[200],
             padding: EdgeInsets.all(5),
@@ -67,7 +70,7 @@ class MyPiece extends StatelessWidget {
       return GestureDetector(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: EdgeInsets.all(screenWidth/82),
           child: Container(
             color: Colors.green[200],
           ),
@@ -83,7 +86,7 @@ class MyPiece extends StatelessWidget {
           color: thisPieceIsSelected == 'selected'
               ? Colors.green[200]
               : Colors.transparent,
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(screenWidth/50),
           child: Stack(
             children: [
                 IsHidden(

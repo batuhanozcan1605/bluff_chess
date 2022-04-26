@@ -1768,7 +1768,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
  Widget buildSetRandomWhite() => FloatingActionButton.extended(
    backgroundColor: Color(0xFFE27046),
-   label: Text('SET\nRONDOM',
+   label: Text('SET\nRANDOM',
        textAlign: TextAlign.center,
        style: TextStyle(color: Colors.white, fontSize: 12)),
    onPressed: () {
@@ -1805,7 +1805,7 @@ class _MatchScreenState extends State<MatchScreen> {
       child: Transform(
           transform: Matrix4.rotationY(math.pi),
           alignment: Alignment.center,
-          child: Text('SET\nRONDOM',
+          child: Text('SET\nRANDOM',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black87, fontSize: 12))),
     ),
