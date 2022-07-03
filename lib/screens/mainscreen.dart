@@ -15,6 +15,13 @@ class _MainScreenState extends State<MainScreen> {
 
   void showInfoAboutOnline() {
 
+    Widget back = TextButton(
+      onPressed: ()
+      async {
+      await launch('https://www.kickstarter.com/projects/batuhanozcan/bluff-chess');
+      },
+        child: Text("BACK US!", style: TextStyle(color: Colors.white),),);
+
     Widget ok = TextButton(
       onPressed: () => Navigator.pop(context),
       child: Text("OK GOOD LUCK", style: TextStyle(color: Colors.white),),);
@@ -29,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
       title: Text("THAT'S THE GOAL OF THE PROJECT", style: TextStyle(color: Colors.white),),
       content: info,
       actions: [
-        ok,
+        back,
       ],
     );
     
@@ -50,27 +57,8 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: Color(0xFFA1887F),
       appBar: AppBar(
         backgroundColor: Color(0xA1887F),
-        centerTitle: true,
-        title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-          child: SizedBox(
-            width: 40,
-            height: 40,
-              child: SvgPicture.asset('images/logo_front.svg')),
-        ),
         leadingWidth: 150,
-        leading: Center(
-          child: const Text(
-                  'Bluff Chess',
-                  style: TextStyle(
-                    fontFamily: 'Verdana',
-                    fontSize: 18,
-                    color: Color(0xFFEDE9D0),
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-        ),
+
          actions: [
            GestureDetector(
                onTap: () async {
@@ -93,8 +81,13 @@ class _MainScreenState extends State<MainScreen> {
           Container(
             height: 50,
             color: Color(0xFFEDE9D0),
-            child: Center(child: Text("BETA TESTING",
-              style: TextStyle(color: Colors.black87,),)),
+            child: Center(child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+              child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: SvgPicture.asset('images/logo_front.svg')),
+            ),),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
